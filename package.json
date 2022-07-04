@@ -1,0 +1,15 @@
+{
+  "name": "secret-voting",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Apocentre/secret-voting.git",
+  "author": "ppoliani <ppoliani@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "snarkjs": "^0.4.22"
+  },
+  "dependencies": {
+    "circomlib": "^2.0.5",
+    "circomlibjs": "^0.1.6"
+  }
+}
