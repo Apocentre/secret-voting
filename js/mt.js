@@ -1,25 +1,35 @@
 const {MerkleTree} = require('merkletreejs')
 const buildPoseidon = require('circomlibjs').buildPoseidon;
-const buildBabyJub = require('circomlibjs').buildBabyjub
 
 // remove the 0x from the value
-const hasher = (F, hash) => val => hash([val])
+const hasher = hash => val => {
+  if(val.length === 64) {
+    return hash([
+      val.slice(0, 32),
+      val.slice(32, 64),
+    ])
+  } else {
+    return hash([val])
+  }
+}
+
+let hashFn = null
 
 const createTree = async (accounts) => {
-  const F = (await buildBabyJub()).F
   const hash = await buildPoseidon()
+  hashFn = hasher(hash)
 
-  return new MerkleTree(accounts, hasher(F, hash), {sortPairs: false, hashLeaves: true})
+  return new MerkleTree(accounts, hashFn, {sortPairs: false, hashLeaves: true})
 }
 
 const getRoot = tree => tree.getHexRoot()
-const getProof = (tree, leaf) => tree.getHexProof(hash(leaf))
+const getProof = (tree, leaf) => tree.getHexProof(hashFn(leaf))
 
 const main = async () => {
-  const tree = await createTree([11,22,33,44,55,66,77,88])
+  const tree = await createTree([11, 22, 33, 44, 55, 66, 77, 88])
 
   console.log('Root', getRoot(tree))
-  console.log('Proof', getProof(tree, hasher(22)))
+  console.log('Proof', getProof(tree, 22))
 }
 
 main().then(() => {})
