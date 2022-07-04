@@ -1,2 +1,6 @@
 node_modules
 DS_store
+voting_js
+voting_cpp
+voting.r1cs
+voting.sym
