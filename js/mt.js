@@ -1,5 +1,5 @@
 const {MerkleTree} = require('merkletreejs')
-const buildPoseidon = require('circomlibjs').buildPoseidon;
+const buildPoseidon = require('circomlibjs').buildPoseidon
 
 // remove the 0x from the value
 const hasher = hash => val => {

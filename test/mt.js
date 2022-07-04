@@ -1,6 +1,6 @@
 const chai = require('chai')
 const assert = chai.assert;
-const {createTree, getRoot, getProof, createLeaf} = require('../js/mt.js');
+const {createTree, getRoot, getProof, createLeaf} = require('../js/mt.js')
 
 
 describe('Merkle tree test', function () {
